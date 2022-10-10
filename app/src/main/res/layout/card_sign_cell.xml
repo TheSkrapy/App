@@ -18,13 +18,13 @@
             <ImageView
                 android:id="@+id/img_sign"
                 android:contentDescription="@string/objeto1"
-                android:layout_width="120dp"
+                android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:adjustViewBounds="true">
             </ImageView>
             <TextView
                 android:id="@+id/txt_sign"
-                android:layout_width="120dp"
+                android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:gravity="center"
                 android:text="A"

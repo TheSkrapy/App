@@ -32,12 +32,15 @@ public class TextSignActivity extends AppCompatActivity {
 
         EditText edtWrite = findViewById(R.id.st_eTwrite);
         int[] nChar = {0};
-
+        //selection[0] SelectionStart
+        //selection[1] SelectionEnd
+        int[] selection = {0, 1};
+        int end;
         edtWrite.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-
+                selection[0] = edtWrite.getSelectionStart();
+                selection[1] = edtWrite.getSelectionEnd();
             }
 
             @Override
@@ -50,24 +53,36 @@ public class TextSignActivity extends AppCompatActivity {
                 String str = editable.toString();
 
                 //Detect if user add or delete a char
-                if (str.length() > nChar[0]){
-                    //add sign
-                    int id = getMeanId(signList, getChar(str, nChar));
-                    signTranslate.add(signList.get(id));
+                if (nChar[0] >= 0) {
+                    if (str.length() > nChar[0]) {
+                        //add sign
+                        int id = getMeanId(signList, getChar(str, nChar));
+                        signTranslate.add(nChar[0] - 1 ,signList.get(id));
+                    }
+                    if (str.length() < nChar[0]){
+                        //remove sign
+                        if (selection[0] != selection[1]){
+                            for (int i = selection[1] - 1; i >= selection[0]; i--) {
+                                signTranslate.remove(i);
+                                nChar[0] -= 1;
+                            }
+                        }
+                        else {
+                            for (int i = selection[1] - 1; i >= selection[0] - 1; i--) {
+                                signTranslate.remove(i);
+                                nChar[0] -= 1;
+                            }
+                        }
+                    }
                     binding.tsRecyclerView.setAdapter(new CardAdapter(signTranslate));
                 }
-                else{
-                    //remove sign
-                    nChar[0] -= 1;
-                }
-
             }
         });
 
         //Get microphone String
         String strMicro = "  ";
         for (int i=0; i < strMicro.length(); i++){
-            getChar(strMicro, i);
+            //getChar(strMicro, i);
             //add image sign
         }
     }
@@ -109,7 +124,6 @@ public class TextSignActivity extends AppCompatActivity {
         signList.add(new Sign(R.drawable.img_b, signList.size(), 'B'));
         signList.add(new Sign(R.drawable.img_c, signList.size(), 'C'));
         signList.add(new Sign(R.drawable.img_d, signList.size(), 'D'));
-
         signList.add(new Sign(R.drawable.img_e, signList.size(), 'E'));
         signList.add(new Sign(R.drawable.img_f, signList.size(), 'F'));
         signList.add(new Sign(R.drawable.img_g, signList.size(), 'G'));
@@ -133,6 +147,7 @@ public class TextSignActivity extends AppCompatActivity {
         signList.add(new Sign(R.drawable.img_y, signList.size(), 'Y'));
         signList.add(new Sign(R.drawable.img_z, signList.size(), 'Z'));
     }
+
 
     private char chToLowerCase(char c1){
         int temp = (int)c1;
