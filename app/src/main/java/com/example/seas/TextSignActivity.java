@@ -57,7 +57,7 @@ public class TextSignActivity extends AppCompatActivity {
                     if (str.length() > nChar[0]) {
                         //add sign
                         int id = getMeanId(signList, getChar(str, nChar));
-                        signTranslate.add(nChar[0] - 1 ,signList.get(id));
+                        signTranslate.add(nChar[0] - 1, signList.get(id));
                     }
                     if (str.length() < nChar[0]){
                         //remove sign
@@ -110,9 +110,14 @@ public class TextSignActivity extends AppCompatActivity {
         int j=0;
         for (int i = 0; i<listOrigin.size(); i++){
             char c1 = listOrigin.get(i).mean;
-            if (c1 == c || chToLowerCase(c1) == c){
+            if (c1 == c || chToLowerCase(c1) == c && c != ' '){
                 j=i;
                 break;
+            }
+            else {
+                if (c == ' '){
+                    j = -1;
+                }
             }
         }
 
@@ -146,6 +151,7 @@ public class TextSignActivity extends AppCompatActivity {
         signList.add(new Sign(R.drawable.img_x, signList.size(), 'X'));
         signList.add(new Sign(R.drawable.img_y, signList.size(), 'Y'));
         signList.add(new Sign(R.drawable.img_z, signList.size(), 'Z'));
+        signList.add(new Sign(R.drawable.img_blanco, -1, ' '));
     }
 
 
