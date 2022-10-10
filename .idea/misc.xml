@@ -3,10 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Proyectos/Seas/app/src/main/res/layout/activity_basics.xml" value="0.17831813576494426" />
         <entry key="..\:/Proyectos/Seas/app/src/main/res/layout/activity_main.xml" value="0.3546195652173913" />
         <entry key="..\:/Users/eddy-/AndroidStudioProjects/TheSkrapy/app/src/main/res/drawable/ic_baseline_keyboard_voice_24.xml" value="0.1" />
         <entry key="..\:/Users/eddy-/AndroidStudioProjects/TheSkrapy/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/eddy-/AndroidStudioProjects/TheSkrapy/app/src/main/res/layout/activity_text_sign.xml" value="0.25" />
+        <entry key="..\:/Users/eddy-/AndroidStudioProjects/TheSkrapy/app/src/main/res/layout/activity_text_sign.xml" value="0.1" />
         <entry key="..\:/Users/eddy-/AndroidStudioProjects/TheSkrapy/app/src/main/res/layout/card_sign_cell.xml" value="0.1" />
         <entry key="..\:/Users/eddy-/AndroidStudioProjects/TheSkrapy/app/src/main/res/layout/row_table_iv.xml" value="0.1" />
       </map>
