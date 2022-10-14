@@ -2,4 +2,24 @@
     <string name="app_name">Señas</string>
     <string name="escribe">Escribe texto</string>
     <string name="objeto1">Seña</string>
+    <string name="menu_main">Home</string>
+    <string name="menu_text_sign">Texto a seña</string>
+    <string name="menu_sign_text">Seña a texto</string>
+    <string name="menu_basic_sign">Señas basicas</string>
+    <string name="nav_header_title">Señas Mexicanas</string>
+    <string name="nav_header_desc">Logo</string>
+    <string name="nav_header_subtitle">1.0</string>
+    <string name="title_activity_home">Señas mexicanas</string>
+    <string name="action_settings">Configuración</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
