@@ -2,36 +2,39 @@ package com.example.seas;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.seas.databinding.ActivitySignTextBinding;
-import com.example.seas.databinding.ActivityTextSignBinding;
+import com.example.seas.interfaces.OnSignTextClick;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SignTextActivity extends AppCompatActivity {
+public class SignTextActivity extends AppCompatActivity implements OnSignTextClick {
     List<Sign> signList = new ArrayList<>();
     ActivitySignTextBinding binding;
+    TextView txtViewResult;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_text);
         binding = ActivitySignTextBinding.inflate(getLayoutInflater());
+        txtViewResult = binding.stTVresult;
+        setContentView(binding.getRoot());
 
-        setDataSigns(signList);
+        setDataSigns();
 
-        binding.stRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
-
-        TextView txtViewResult = findViewById(R.id.st_tVresult);
-        binding.stRecyclerView.setAdapter(new CardAdapter(signList));
+        RecyclerView recyclerView = binding.stRecyclerView;
+        recyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
+        recyclerView.setAdapter(new CardStAdapter(signList, this));
 
         //Listen audio
     }
 
-    private List<Sign> setDataSigns (List<Sign> signList){
+    private void setDataSigns (){
         signList.add(new Sign(R.drawable.img_a, signList.size(), 'A'));
         signList.add(new Sign(R.drawable.img_b, signList.size(), 'B'));
         signList.add(new Sign(R.drawable.img_c, signList.size(), 'C'));
@@ -59,6 +62,14 @@ public class SignTextActivity extends AppCompatActivity {
         signList.add(new Sign(R.drawable.img_y, signList.size(), 'Y'));
         signList.add(new Sign(R.drawable.img_z, signList.size(), 'Z'));
         signList.add(new Sign(R.drawable.img_blanco, -1, ' '));
-        return signList;
+    }
+
+    @Override
+    public void onClick(String mean) {
+        String result = (String) txtViewResult.getText() + mean;
+        txtViewResult.setText(result);
     }
 }
+
+
+
