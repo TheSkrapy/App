@@ -1,6 +1,5 @@
 package com.example.seas;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.app.Activity;
@@ -14,15 +13,19 @@ import com.example.seas.databinding.ActivityTextSignBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TextSignActivity extends AppCompatActivity {
+public class TextSignActivity extends MainActivity {
     List<Sign> signList = new ArrayList<>();
     ActivityTextSignBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         binding = ActivityTextSignBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        allocateActivityTitle(getString(R.string.menu_text_sign));
+
         List<Sign> signTranslate = new ArrayList<>();
 
         createSigns();

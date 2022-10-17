@@ -2,20 +2,13 @@ package com.example.seas;
 
 import android.content.Intent;
 import android.os.Bundle;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.appcompat.app.AppCompatActivity;
-import android.view.View;
 
 import androidx.cardview.widget.CardView;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import com.example.seas.databinding.ActivityHomeBinding;
 
 public class HomeActivity extends MainActivity {
 
-    private AppBarConfiguration appBarConfiguration;
     private ActivityHomeBinding binding;
 
     @Override
@@ -30,7 +23,7 @@ public class HomeActivity extends MainActivity {
                 startActivity(new Intent(view.getContext(),TextSignActivity.class))
         );
 
-        allocateActivityTitle("Home");
+        allocateActivityTitle(getString(R.string.menu_main));
     }
 
 }

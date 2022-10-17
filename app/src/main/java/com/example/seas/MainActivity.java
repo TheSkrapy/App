@@ -81,6 +81,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, HomeActivity.class));
                 overridePendingTransition(0, 0);
                 break;
+            case R.id.nav_text_sign: //Resource IDs will be non-final by default in Android Gradle Plugin version 8.0
+                startActivity(new Intent(this, TextSignActivity.class));
+                overridePendingTransition(0, 0);
+                break;
         }
         return false;
     }
