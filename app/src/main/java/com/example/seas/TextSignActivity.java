@@ -105,7 +105,7 @@ public class TextSignActivity extends AppCompatActivity {
     }
 
     private void createSigns (){
-        Sign sign1 = new Sign(R.drawable.ic_baseline_keyboard_voice_24, signList.size(), 'A');
+        Sign sign1 = new Sign(R.drawable.ic_baseline_keyboard_voice_24, signList.size(), 'X');
         signList.add(sign1);
         Sign sign2 = new Sign(R.drawable.ic_baseline_keyboard_voice_24, signList.size(), 'B');
         signList.add(sign2);
