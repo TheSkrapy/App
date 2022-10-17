@@ -16,12 +16,14 @@
             android:name=".HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.Señas.NoActionBar" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".Menu_activity"
+            android:exported="false" />
+        <activity
+            android:name=".Basics"
+            android:exported="false" />
+        <activity
+            android:name=".SignTextActivity"
+            android:exported="false" />
         <activity
             android:name=".TextSignActivity"
             android:exported="false"
@@ -29,9 +31,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="false"
-            android:label="Señas"
             android:theme="@style/Theme.Señas.NoActionBar">
-
         </activity>
     </application>
 
