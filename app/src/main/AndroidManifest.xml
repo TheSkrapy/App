@@ -20,6 +20,9 @@
             android:name=".Basics"
             android:exported="false" />
         <activity
+            android:name=".SignTextActivity"
+            android:exported="false" />
+        <activity
             android:name=".TextSignActivity"
             android:exported="false" />
         <activity
