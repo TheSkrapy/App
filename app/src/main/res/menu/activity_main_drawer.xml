@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="@string/menu_main" />
+        <item
+            android:id="@+id/nav_text_sign"
+            android:icon="@drawable/text"
+            android:title="@string/menu_text_sign" />
+        <item
+            android:id="@+id/nav_sign_text"
+            android:icon="@drawable/sign_abc"
+            android:title="@string/menu_sign_text" />
+        <item
+            android:id="@+id/nav_basic_sign"
+            android:icon="@drawable/basic_sign"
+            android:title="@string/menu_basic_sign" />
+    </group>
+</menu>

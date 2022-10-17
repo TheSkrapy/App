@@ -1,5 +1,21 @@
 <resources>
-    <string name="app_name">Señas</string>
+    <string name="app_name">Traductor LSM</string>
     <string name="escribe">Escribe texto</string>
     <string name="objeto1">Seña</string>
+    <!--Strings used for menu items-->
+    <string name="menu_main">Home</string>
+    <string name="menu_text_sign">Texto a seña</string>
+    <string name="menu_sign_text">Seña a texto</string>
+    <string name="menu_basic_sign">Señas basicas</string>
+    <!-- Strings used for navigation header-->
+    <string name="nav_header_desc">Logo</string>
+    <string name="nav_header_subtitle">1.0</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="menu_drawer_open">Drawer Open</string>
+    <string name="menu_drawer_close">Drawer Close</string>
+    <string name="seña">Selecciona señas</string>
+    <!-- Strings used for clasification of signs-->
+    <string name="clasification1">ABECEDARIO</string>
+    <string name="clasification2">MESES Y TIEMPO</string>
+    <string name="clasification3">SALUDOS</string>
 </resources>
