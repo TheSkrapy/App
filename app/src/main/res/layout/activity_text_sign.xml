@@ -21,7 +21,6 @@
             android:textSize="20sp"
             android:textAlignment="center"/>
         <Button
-            android:id="@+id/st_microphone"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
@@ -33,9 +32,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tsRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/ts_recyclerView"/>
+            android:layout_height="wrap_content" />
     </ScrollView>
 
 </LinearLayout>
