@@ -13,10 +13,10 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.example.seas.databinding.ActivityHomeBinding;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends MainActivity {
 
     private AppBarConfiguration appBarConfiguration;
-private ActivityHomeBinding binding;
+    private ActivityHomeBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,8 @@ private ActivityHomeBinding binding;
         card1.setOnClickListener(view ->
                 startActivity(new Intent(view.getContext(),TextSignActivity.class))
         );
+
+        allocateActivityTitle("Home");
     }
 
 }
