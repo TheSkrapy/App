@@ -16,7 +16,7 @@ import com.example.seas.databinding.ActivityTextSignBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Basics extends AppCompatActivity {
+public class Basics extends MainActivity {
     List<Sign> signList = new ArrayList<>();
     private ActivityBasicsBinding binding;
 
@@ -26,6 +26,8 @@ public class Basics extends AppCompatActivity {
         binding = ActivityBasicsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         //List<Sign> signTranslate = new ArrayList<>();
+
+        allocateActivityTitle(getString(R.string.menu_basic_sign));
 
         //Evaluacion de metodo seleccionado
         switch (global.menu){
@@ -40,12 +42,9 @@ public class Basics extends AppCompatActivity {
                 break;
         }
 
-
         Activity Basics = this;
         binding.bsrecycler.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
         binding.bsrecycler.setAdapter(new CardAdapter(signList));
-
-
     }
 
     private void createSignsABC() { //Metodo para presentar el abecedario

@@ -13,7 +13,7 @@ import com.example.seas.interfaces.OnSignTextClick;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SignTextActivity extends AppCompatActivity implements OnSignTextClick {
+public class SignTextActivity extends MainActivity implements OnSignTextClick {
     List<Sign> signList = new ArrayList<>();
     ActivitySignTextBinding binding;
     TextView txtViewResult;
@@ -25,6 +25,7 @@ public class SignTextActivity extends AppCompatActivity implements OnSignTextCli
         txtViewResult = binding.stTVresult;
         setContentView(binding.getRoot());
 
+        allocateActivityTitle(getString(R.string.menu_sign_text));
         setDataSigns();
 
         RecyclerView recyclerView = binding.stRecyclerView;
@@ -66,7 +67,7 @@ public class SignTextActivity extends AppCompatActivity implements OnSignTextCli
 
     @Override
     public void onClick(String mean) {
-        String result = (String) txtViewResult.getText() + mean;
+        String result = txtViewResult.getText() + mean;
         txtViewResult.setText(result);
     }
 }

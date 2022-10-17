@@ -6,48 +6,44 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import com.example.seas.databinding.ActivityMenuBinding;
 
 class global{ //Clase para poder utilizar una variable global
-    public static int menu=0; //Variable para poder seleccionar las señas a presentar
-
+    public static int menu = 0; //Variable para poder seleccionar las señas a presentar
 }
 
-public class Menu_activity extends AppCompatActivity {
+public class Menu_activity extends MainActivity {
     Button btnAbc;
     Button btnMesesyTiempo;
     Button btnSaludos;
+    ActivityMenuBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
 
-        btnAbc=(Button)findViewById(R.id.btnAbc);
-        btnMesesyTiempo=(Button)findViewById(R.id.btnMesesyTiempo);
-        btnSaludos=(Button)findViewById(R.id.btnSaludos);
+        binding = ActivityMenuBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        btnAbc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                global.menu=1;
-                Cambio();
-            }
+        btnAbc = binding.btnAbc;
+        btnMesesyTiempo = binding.btnMesesyTiempo;
+        btnSaludos = binding.btnSaludos;
+
+        allocateActivityTitle(getString(R.string.menu_basic_sign));
+
+        btnAbc.setOnClickListener(view -> {
+            global.menu=1;
+            Cambio();
         });
 
-        btnMesesyTiempo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                global.menu=2;
-                Cambio();
-            }
+        btnMesesyTiempo.setOnClickListener(view -> {
+            global.menu=2;
+            Cambio();
         });
 
-        btnSaludos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                global.menu=3;
-                Cambio();
-            }
+        btnSaludos.setOnClickListener(view -> {
+            global.menu=3;
+            Cambio();
         });
 
     }

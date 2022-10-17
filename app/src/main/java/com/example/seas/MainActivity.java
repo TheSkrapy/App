@@ -71,6 +71,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, TextSignActivity.class));
                 overridePendingTransition(0, 0);
                 break;
+            case R.id.nav_sign_text:
+                startActivity(new Intent(this, SignTextActivity.class));
+                overridePendingTransition(0, 0);
+                break;
+            case R.id.nav_basic_sign:
+                startActivity(new Intent(this, Menu_activity.class));
+                overridePendingTransition(0, 0);
+                break;
         }
         return false;
     }

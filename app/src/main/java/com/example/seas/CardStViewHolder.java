@@ -17,7 +17,7 @@ public class CardStViewHolder extends RecyclerView.ViewHolder{
 
     public void bindBook (Sign sign, OnSignTextClick getMean){
         cardSignCellBinding.imgSign.setImageResource(sign.sign);
-        cardSignCellBinding.txtSign.setText(sign.mean);
+        cardSignCellBinding.txtSign.setText(sign.mean+"");
         cardSignCellBinding.card.setOnClickListener(view -> getMean.onClick(sign.mean+""));
     }
 }

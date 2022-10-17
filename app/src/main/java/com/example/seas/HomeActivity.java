@@ -18,9 +18,14 @@ public class HomeActivity extends MainActivity {
          binding = ActivityHomeBinding.inflate(getLayoutInflater());
          setContentView(binding.getRoot());
 
-        CardView card1 = binding.card1;
-        card1.setOnClickListener(view ->
+        binding.card1.setOnClickListener(view ->
                 startActivity(new Intent(view.getContext(),TextSignActivity.class))
+        );
+        binding.card2.setOnClickListener(view->
+                startActivity(new Intent(view.getContext(), SignTextActivity.class))
+        );
+        binding.card3.setOnClickListener(view->
+                startActivity(new Intent(view.getContext(), Menu_activity.class))
         );
 
         allocateActivityTitle(getString(R.string.menu_main));

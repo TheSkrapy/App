@@ -10,36 +10,30 @@
         android:id="@+id/btnAbc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="141dp"
-        android:layout_marginTop="190dp"
-        android:layout_marginEnd="141dp"
-        android:layout_marginBottom="103dp"
-        android:text="Abecedario"
+        android:text="@string/clasification1"
         app:layout_constraintBottom_toTopOf="@+id/btnMesesyTiempo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.735" />
 
     <Button
         android:id="@+id/btnMesesyTiempo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginEnd="125dp"
-        android:layout_marginBottom="99dp"
-        android:text="Meses y tiempo"
+        android:layout_marginBottom="72dp"
+        android:text="@string/clasification2"
         app:layout_constraintBottom_toTopOf="@+id/btnSaludos"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnSaludos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="154dp"
-        android:layout_marginEnd="155dp"
-        android:layout_marginBottom="195dp"
-        android:text="Saludos"
+        android:layout_marginBottom="216dp"
+        android:text="@string/clasification3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
