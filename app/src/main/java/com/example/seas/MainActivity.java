@@ -75,8 +75,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return false;
     }
 
-    protected void allocateActivityTitle (String titleString){
-        if (getSupportActionBar() != null){
+    protected void allocateActivityTitle (String titleString) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setTitle(titleString);
         }
+    }
 }

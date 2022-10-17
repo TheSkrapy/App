@@ -15,7 +15,8 @@
         <activity
             android:name=".HomeActivity"
             android:exported="true"
-            android:theme="@style/Theme.Señas.NoActionBar" >
+            android:theme="@style/Theme.Señas.NoActionBar" />
+        <activity
             android:name=".Menu_activity"
             android:exported="false" />
         <activity
