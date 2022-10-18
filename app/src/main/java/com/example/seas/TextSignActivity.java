@@ -1,6 +1,7 @@
 package com.example.seas;
 
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import java.util.List;
 public class TextSignActivity extends MainActivity {
     List<Sign> signList = new ArrayList<>();
     ActivityTextSignBinding binding;
+    RecyclerView tsRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,22 +30,22 @@ public class TextSignActivity extends MainActivity {
 
         List<Sign> signTranslate = new ArrayList<>();
 
-        createSigns();
+        setDataSigns();
 
-        Activity textSignActivity = this;
-        binding.tsRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
+        tsRecyclerView = binding.tsRecyclerView;
+        tsRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
 
         EditText edtWrite = findViewById(R.id.st_eTwrite);
-        int[] nChar = {0};
-        //selection[0] SelectionStart
-        //selection[1] SelectionEnd
-        int[] selection = {0, 1};
-        int end;
+        int[] selectionStart = {0};
+        int[] selectionEnd = {0};
+        int[] strLengthBefore = {0};
+
         edtWrite.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                selection[0] = edtWrite.getSelectionStart();
-                selection[1] = edtWrite.getSelectionEnd();
+                selectionStart[0] = edtWrite.getSelectionStart();
+                selectionEnd[0] = edtWrite.getSelectionEnd();
+                strLengthBefore[0] = edtWrite.getText().length();
             }
 
             @Override
@@ -54,31 +56,19 @@ public class TextSignActivity extends MainActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 String str = editable.toString();
+                int strLengthAfter = str.length();
 
                 //Detect if user add or delete a char
-                if (nChar[0] >= 0) {
-                    if (str.length() > nChar[0]) {
-                        //add sign
-                        int id = getMeanId(signList, getChar(str, nChar));
-                        signTranslate.add(nChar[0] - 1, signList.get(id));
-                    }
-                    if (str.length() < nChar[0]){
-                        //remove sign
-                        if (selection[0] != selection[1]){
-                            for (int i = selection[1] - 1; i >= selection[0]; i--) {
-                                signTranslate.remove(i);
-                                nChar[0] -= 1;
-                            }
-                        }
-                        else {
-                            for (int i = selection[1] - 1; i >= selection[0] - 1; i--) {
-                                signTranslate.remove(i);
-                                nChar[0] -= 1;
-                            }
-                        }
-                    }
-                    binding.tsRecyclerView.setAdapter(new CardAdapter(signTranslate));
+                if (strLengthAfter > strLengthBefore[0]) {
+                    //add sign
+                    int id = getMeanId(getChar(str, strLengthAfter-1));
+                    addSign(id, signTranslate);
                 }
+                if (strLengthAfter < strLengthBefore[0]) {
+                    //remove sign
+                    removeSign(selectionStart[0], selectionEnd[0], signTranslate);
+                }
+                binding.tsRecyclerView.setAdapter(new CardAdapter(signTranslate));
             }
         });
 
@@ -101,33 +91,36 @@ public class TextSignActivity extends MainActivity {
         return c;
     }
 
-    private void addSign (){
-
+    private void addSign (int id, List<Sign> signTranslate){
+        signTranslate.add(signTranslate.size(), signList.get(id));
     }
 
-    private void removeSign (){
-
+    private void removeSign (int selectionStart, int selectionEnd, List<Sign> signTranslate){
+        if (selectionStart != selectionEnd){
+            if (selectionEnd > selectionStart) {
+                signTranslate.subList(selectionStart, selectionEnd).clear();
+            }
+        }
+        else {
+            signTranslate.remove(selectionEnd-1);
+        }
     }
 
-    private int getMeanId (List<Sign> listOrigin, char c) {
+    private int getMeanId (char c) {
         int j=0;
-        for (int i = 0; i<listOrigin.size(); i++){
-            char c1 = listOrigin.get(i).mean;
-            if (c1 == c || chToLowerCase(c1) == c && c != ' '){
+
+        for (int i = 0; i<signList.size(); i++){
+            char c1 = signList.get(i).mean;
+            if (c1 == c || chToLowerCase(c1) == c){
                 j=i;
                 break;
-            }
-            else {
-                if (c == ' '){
-                    j = -1;
-                }
             }
         }
 
         return j;
     }
 
-    private void createSigns (){
+    private void setDataSigns (){
         signList.add(new Sign(R.drawable.img_a, signList.size(), 'A'));
         signList.add(new Sign(R.drawable.img_b, signList.size(), 'B'));
         signList.add(new Sign(R.drawable.img_c, signList.size(), 'C'));
@@ -164,6 +157,4 @@ public class TextSignActivity extends MainActivity {
         c1=(char)temp;
         return c1;
     }
-
-
 }
