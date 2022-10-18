@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.seas.databinding.ActivityTextSignBinding;
@@ -29,13 +30,15 @@ public class TextSignActivity extends MainActivity {
         allocateActivityTitle(getString(R.string.menu_text_sign));
 
         List<Sign> signTranslate = new ArrayList<>();
+        EditText edtWrite = binding.stETwrite;
+        Button btnMicro = binding.btnMicro;
 
         setDataSigns();
 
         tsRecyclerView = binding.tsRecyclerView;
         tsRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
 
-        EditText edtWrite = findViewById(R.id.st_eTwrite);
+
         int[] selectionStart = {0};
         int[] selectionEnd = {0};
         int[] strLengthBefore = {0};
@@ -61,8 +64,8 @@ public class TextSignActivity extends MainActivity {
                 //Detect if user add or delete a char
                 if (strLengthAfter > strLengthBefore[0]) {
                     //add sign
-                    int id = getMeanId(getChar(str, strLengthAfter-1));
-                    addSign(id, signTranslate);
+                    int id = getMeanId(getChar(str, selectionEnd[0]));
+                    addSign(id, signTranslate, selectionEnd[0]);
                 }
                 if (strLengthAfter < strLengthBefore[0]) {
                     //remove sign
@@ -91,15 +94,13 @@ public class TextSignActivity extends MainActivity {
         return c;
     }
 
-    private void addSign (int id, List<Sign> signTranslate){
-        signTranslate.add(signTranslate.size(), signList.get(id));
+    private void addSign (int id, List<Sign> signTranslate, int tvPosition){
+        signTranslate.add(tvPosition, signList.get(id));
     }
 
     private void removeSign (int selectionStart, int selectionEnd, List<Sign> signTranslate){
-        if (selectionStart != selectionEnd){
-            if (selectionEnd > selectionStart) {
-                signTranslate.subList(selectionStart, selectionEnd).clear();
-            }
+        if (selectionEnd > selectionStart) {
+            signTranslate.subList(selectionStart, selectionEnd).clear();
         }
         else {
             signTranslate.remove(selectionEnd-1);
