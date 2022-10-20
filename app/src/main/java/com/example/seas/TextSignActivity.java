@@ -1,12 +1,17 @@
 package com.example.seas;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -18,7 +23,11 @@ import java.util.List;
 public class TextSignActivity extends MainActivity {
     List<Sign> signList = new ArrayList<>();
     ActivityTextSignBinding binding;
+    EditText edtWrite;
+    Button btnMicro;
     RecyclerView tsRecyclerView;
+    private static final int RECOGNIZER_RESULT = 1;
+    int j = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,25 +39,33 @@ public class TextSignActivity extends MainActivity {
         allocateActivityTitle(getString(R.string.menu_text_sign));
 
         List<Sign> signTranslate = new ArrayList<>();
-        EditText edtWrite = binding.stETwrite;
-        Button btnMicro = binding.btnMicro;
+        edtWrite = binding.stETwrite;
+        btnMicro = binding.btnMicro;
 
         setDataSigns();
 
         tsRecyclerView = binding.tsRecyclerView;
         tsRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 3));
 
-
         int[] selectionStart = {0};
         int[] selectionEnd = {0};
         int[] strLengthBefore = {0};
+        boolean[] textFromMicro = {false};
 
         edtWrite.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                selectionStart[0] = edtWrite.getSelectionStart();
-                selectionEnd[0] = edtWrite.getSelectionEnd();
-                strLengthBefore[0] = edtWrite.getText().length();
+                //Detect if the edtText is empty
+                if (signTranslate.size() == 0){
+                    selectionStart[0] = 0;
+                    selectionEnd[0] = 0;
+                    strLengthBefore[0] = 0;
+                }
+                else {
+                    selectionStart[0] = edtWrite.getSelectionStart();
+                    selectionEnd[0] = edtWrite.getSelectionEnd();
+                    strLengthBefore[0] = edtWrite.getText().length();
+                }
             }
 
             @Override
@@ -61,37 +78,63 @@ public class TextSignActivity extends MainActivity {
                 String str = editable.toString();
                 int strLengthAfter = str.length();
 
-                //Detect if user add or delete a char
+                //Detect if user add or delete text
                 if (strLengthAfter > strLengthBefore[0]) {
-                    //add sign
-                    int id = getMeanId(getChar(str, selectionEnd[0]));
-                    addSign(id, signTranslate, selectionEnd[0]);
+                    int lastChar;
+
+                    //Detect if text is from micro
+                    if (strLengthAfter - strLengthBefore[0] > 1){
+                        textFromMicro[0] = true;
+                    }
+
+                    //Detect if new char is between the text example hel|lo OR is the last char ex hello|
+                    if (!textFromMicro[0] && strLengthAfter - selectionEnd[0] > 1){//Char between text
+                        lastChar = selectionEnd[0];
+                    }
+                    else {//Last char
+                        lastChar = strLengthAfter - 1;
+                        textFromMicro[0] = false;
+                    }
+
+                    for (int i = selectionStart[0]; i <= lastChar; i++) {
+                        int id = getMeanId(getChar(str, i));
+                        addSign(id, signTranslate, i);
+                    }
                 }
+
                 if (strLengthAfter < strLengthBefore[0]) {
-                    //remove sign
                     removeSign(selectionStart[0], selectionEnd[0], signTranslate);
                 }
+
+                //Update cards in recyclerview
                 binding.tsRecyclerView.setAdapter(new CardAdapter(signTranslate));
             }
         });
 
         //Get microphone String
-        String strMicro = "  ";
-        for (int i=0; i < strMicro.length(); i++){
-            //getChar(strMicro, i);
-            //add image sign
+        btnMicro.setOnClickListener(view -> {
+            signTranslate.clear();
+            Intent speechIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            speechIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            speechIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Voz a texto");
+            startActivityForResult(speechIntent, RECOGNIZER_RESULT);
+        });
+    }
+
+    @Override
+    protected void onActivityResult (int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == RECOGNIZER_RESULT && resultCode == RESULT_OK){
+            ArrayList<String> matches = null;
+            if (data != null) {
+                matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            }
+            edtWrite.setText(matches.get(0));
         }
+        super.onActivityResult(requestCode, resultCode, null);
     }
 
     private char getChar (String str, int nChar){
         return str.charAt(nChar);
-    }
-
-    private char getChar (String str, int[] nChar){
-        char c = str.charAt(nChar[0]);
-
-        nChar[0] +=1;
-        return c;
     }
 
     private void addSign (int id, List<Sign> signTranslate, int tvPosition){
@@ -150,7 +193,6 @@ public class TextSignActivity extends MainActivity {
         signList.add(new Sign(R.drawable.img_z, signList.size(), 'Z'));
         signList.add(new Sign(R.drawable.img_blanco, -1, ' '));
     }
-
 
     private char chToLowerCase(char c1){
         int temp = (int)c1;
