@@ -50,7 +50,6 @@ public class TextSignActivity extends MainActivity {
         int[] selectionStart = {0};
         int[] selectionEnd = {0};
         int[] strLengthBefore = {0};
-        boolean[] textFromMicro = {false};
 
         edtWrite.addTextChangedListener(new TextWatcher() {
             @Override
@@ -81,19 +80,19 @@ public class TextSignActivity extends MainActivity {
                 //Detect if user add or delete text
                 if (strLengthAfter > strLengthBefore[0]) {
                     int lastChar;
+                    boolean textFromMicro = false;
 
                     //Detect if text is from micro
                     if (strLengthAfter - strLengthBefore[0] > 1){
-                        textFromMicro[0] = true;
+                        textFromMicro = true;
                     }
 
                     //Detect if new char is between the text example hel|lo OR is the last char ex hello|
-                    if (!textFromMicro[0] && strLengthAfter - selectionEnd[0] > 1){//Char between text
+                    if (!textFromMicro && strLengthAfter - selectionEnd[0] > 1){//Char between text
                         lastChar = selectionEnd[0];
                     }
                     else {//Last char
                         lastChar = strLengthAfter - 1;
-                        textFromMicro[0] = false;
                     }
 
                     for (int i = selectionStart[0]; i <= lastChar; i++) {
