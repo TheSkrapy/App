@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/gradient_gray"
     tools:context=".SignTextActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,11 +13,12 @@
         <TextView
             android:id="@+id/st_tVresult"
             android:layout_width="match_parent"
-            android:layout_height="210dp"
+            android:layout_height="190dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:hint="@string/seña"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:textAlignment="center"/>
         <Button
             android:id="@+id/st_microphone"

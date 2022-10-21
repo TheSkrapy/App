@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -15,20 +16,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="UseCompoundDrawables">
             <ImageView
                 android:id="@+id/imgSign"
                 android:contentDescription="@string/objeto1"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="120dp"
                 android:adjustViewBounds="true">
             </ImageView>
             <TextView
                 android:id="@+id/txtSign"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="35dp"
                 android:gravity="center"
-                android:textSize="40sp"
+                android:textSize="25sp"
                 android:lines="1">
             </TextView>
         </LinearLayout>
